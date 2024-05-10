@@ -2,7 +2,6 @@ import '../../index.css';
 import styles from './app.module.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import React, { useState } from 'react';
-import { Provider } from 'react-redux';
 
 import { AppHeader } from '@components';
 import { ConstructorPage } from '../../pages/constructor-page';
@@ -21,16 +20,14 @@ import { NotFound404 } from '../../pages/not-fount-404';
 const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleClose = () => {
+  const handleModalClose = () => {
     setIsModalOpen(false);
   };
 
   return (
-    // <Provider store={store}>
     <BrowserRouter>
       <div className={styles.app}>
         <AppHeader />
-        <ConstructorPage />
         <Routes>
           <Route path='/' element={<ConstructorPage />} />
           <Route path='/feed' element={<Feed />} />
@@ -43,7 +40,7 @@ const App = () => {
           <Route
             path='/feed/:number'
             element={
-              <Modal title='Order Info' onClose={handleClose}>
+              <Modal title='Order Info' onClose={handleModalClose}>
                 <OrderInfo />
               </Modal>
             }
@@ -51,7 +48,7 @@ const App = () => {
           <Route
             path='/ingredients/:id'
             element={
-              <Modal title='Ingredients Details' onClose={handleClose}>
+              <Modal title='Ingredients Details' onClose={handleModalClose}>
                 <IngredientDetails />
               </Modal>
             }
@@ -59,7 +56,7 @@ const App = () => {
           <Route
             path='/profile/orders/:number'
             element={
-              <Modal title='Order Info' onClose={handleClose}>
+              <Modal title='Order Info' onClose={handleModalClose}>
                 <OrderInfo />
               </Modal>
             }
@@ -68,7 +65,6 @@ const App = () => {
         </Routes>
       </div>
     </BrowserRouter>
-    // </Provider>
   );
 };
 

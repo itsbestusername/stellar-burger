@@ -1,25 +1,36 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { TConstructorIngredient } from '@utils-types';
+import { TIngredient, TOrder } from '@utils-types';
+
+import { v4 as uuidv4 } from 'uuid';
 
 interface TBurgerConstructor {
-  bun: {
-    price: number;
-  };
+  bun: TIngredient;
   ingredients: TConstructorIngredient[];
 }
 
 interface burgerConstructorState {
-  constructorItems: TBurgerConstructor|null;
+  constructorItems: TBurgerConstructor;
   orderRequest: boolean;
-  orderModalData: null;
+  orderModalData: TOrder | null;
 }
 
 const initialState: burgerConstructorState = {
   constructorItems: {
     bun: {
-      price: 0
+      _id: '',
+      name: '',
+      type: '',
+      proteins: 0,
+      fat: 0,
+      carbohydrates: 0,
+      calories: 0,
+      price: 0,
+      image: '',
+      image_large: '',
+      image_mobile: ''
     },
-    ingredients: [] // Пустой массив начальных ингредиентов
+    ingredients: []
   },
   orderRequest: false,
   orderModalData: null
@@ -37,10 +48,72 @@ const burgerConstructorSlice = createSlice({
     },
     setOrderModalData(state, action) {
       state.orderModalData = action.payload;
+    },
+    addIngredient(state, action) {
+      // Если ингредиент не булка, добавляем его в список ингредиентов
+      if (action.payload.type !== 'bun') {
+        const newIngredient = {
+          ...action.payload,
+          id: uuidv4() // Используем uuid для генерации уникального id
+        };
+        state.constructorItems.ingredients.push(newIngredient);
+      }
+    },
+    setBun(state, action) {
+      // Устанавливаем булку
+      state.constructorItems.bun = action.payload;
+    },
+    clearConstructor(state) {
+      state.constructorItems = {
+        bun: {
+          _id: '',
+          name: '',
+          type: '',
+          proteins: 0,
+          fat: 0,
+          carbohydrates: 0,
+          calories: 0,
+          price: 0,
+          image: '',
+          image_large: '',
+          image_mobile: ''
+        },
+        ingredients: []
+      };
+    },
+    moveIngredientUp(state, action) {
+      const index = action.payload;
+      if (index > 0) {
+        const temp = state.constructorItems.ingredients[index];
+        state.constructorItems.ingredients[index] =
+          state.constructorItems.ingredients[index - 1];
+        state.constructorItems.ingredients[index - 1] = temp;
+      }
+    },
+    moveIngredientDown(state, action) {
+      const index = action.payload;
+      if (index < state.constructorItems.ingredients.length - 1) {
+        const temp = state.constructorItems.ingredients[index];
+        state.constructorItems.ingredients[index] =
+          state.constructorItems.ingredients[index + 1];
+        state.constructorItems.ingredients[index + 1] = temp;
+      }
+    },
+    removeIngredient(state, action) {
+      state.constructorItems.ingredients.splice(action.payload, 1);
     }
   }
 });
 
-export const { setConstructorItems, setOrderRequest, setOrderModalData } =
-  burgerConstructorSlice.actions;
+export const {
+  setConstructorItems,
+  setOrderRequest,
+  setOrderModalData,
+  addIngredient,
+  setBun,
+  clearConstructor,
+  moveIngredientUp,
+  moveIngredientDown,
+  removeIngredient
+} = burgerConstructorSlice.actions;
 export const burgerConstructorReducer = burgerConstructorSlice.reducer;

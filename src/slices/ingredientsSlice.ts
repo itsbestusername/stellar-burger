@@ -7,12 +7,14 @@ interface IngredientsState {
   ingredients: TIngredient[];
   isLoading: boolean;
   error: string | null;
+  selectedIngredient: TIngredient | null;
 }
 
 const initialState: IngredientsState = {
   ingredients: [],
   isLoading: false,
-  error: null
+  error: null,
+  selectedIngredient: null
 };
 
 // Создание асинхронной Thunk-функции для запроса ингредиентов с сервера
@@ -31,7 +33,11 @@ const fetchIngredients = createAsyncThunk(
 const ingredientsSlice = createSlice({
   name: 'ingredients',
   initialState,
-  reducers: {},
+  reducers: {
+    setSelectedIngredient(state, action) {
+      state.selectedIngredient = action.payload;
+    }
+  },
   extraReducers: (builder) => {
     builder
       // Обработка начала запроса
@@ -54,6 +60,7 @@ const ingredientsSlice = createSlice({
 });
 
 export const ingredientsReducer = ingredientsSlice.reducer;
+export const { setSelectedIngredient } = ingredientsSlice.actions;
 
 // Экспорт асинхронной Thunk-функции для использования в компонентах
 export { fetchIngredients };

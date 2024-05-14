@@ -1,7 +1,8 @@
 import '../../index.css';
 import styles from './app.module.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import React, { useState } from 'react';
+import { useDispatch, useSelector, RootState } from '../../services/store';
+import { setSelectedIngredient } from '../../slices/ingredientsSlice';
 
 import { AppHeader } from '@components';
 import { ConstructorPage } from '../../pages/constructor-page';
@@ -18,10 +19,13 @@ import { IngredientDetails } from '../ingredient-details/ingredient-details';
 import { NotFound404 } from '../../pages/not-fount-404';
 
 const App = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useDispatch();
+  const selectedIngredient = useSelector(
+    (state: RootState) => state.ingredients.selectedIngredient
+  );
 
   const handleModalClose = () => {
-    setIsModalOpen(false);
+    dispatch(setSelectedIngredient(null));
   };
 
   return (

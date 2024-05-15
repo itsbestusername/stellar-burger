@@ -1,7 +1,9 @@
 import { FC, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
 import { orderBurgerApi } from '@api';
+import { getCookie } from '../../utils/cookie';
 import { RootState, useSelector, useDispatch } from '../../services/store';
 import {
   setOrderRequest,
@@ -11,20 +13,32 @@ import {
 
 export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
   const constructorItems = useSelector(
     (state: RootState) => state.burgerConstructor.constructorItems
   );
+
   const orderRequest = useSelector(
     (state: RootState) => state.burgerConstructor.orderRequest
   );
+
   const orderModalData = useSelector(
     (state: RootState) => state.burgerConstructor.orderModalData
   );
 
+  const isUserLoggedIn = useSelector(
+    (state: RootState) => state.auth.isLoggedIn
+  );
+
   const onOrderClick = () => {
     if (!constructorItems.bun || orderRequest) return;
+
+    if (!isUserLoggedIn) {
+      navigate('/login');
+      return;
+    }
 
     dispatch(setOrderRequest(true));
 

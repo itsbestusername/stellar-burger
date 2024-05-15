@@ -11,7 +11,7 @@ export const IngredientDetails: FC = () => {
     (state: RootState) => state.ingredients.selectedIngredient
   );
 
-  console.log(ingredientData);
+  console.log(ingredientData); //не передаются данные ингредиента
 
   if (!ingredientData) {
     return <Preloader />;

@@ -3,10 +3,13 @@ import { FC, SyntheticEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector, RootState } from '../../services/store';
 import { updateUserApi } from '@api';
 import { setUser } from '../../slices/userSlice';
+import { getUserApi } from '@api';
+import { Preloader } from '@ui';
 
 export const Profile: FC = () => {
   const dispatch = useDispatch();
   const [updateUserError, setUpdateUserError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   /** TODO: взять переменную из стора */
   const user = useSelector((state: RootState) => state.user);
@@ -18,12 +21,27 @@ export const Profile: FC = () => {
   });
 
   useEffect(() => {
-    setFormValue((prevState) => ({
-      ...prevState,
-      name: user?.name || '',
-      email: user?.email || ''
-    }));
-  }, [user]);
+    const fetchUserData = async () => {
+      try {
+        const response = await getUserApi();
+        dispatch(setUser(response.user));
+        setFormValue({
+          name: response.user.name,
+          email: response.user.email,
+          password: ''
+        });
+      } catch (error) {
+        console.error('Ошибка загрузки данных пользователя:', error);
+        setUpdateUserError(
+          'Ошибка загрузки данных. Пожалуйста, попробуйте снова.'
+        );
+      } finally {
+        setLoading(false); // Устанавливаем загрузку в false после завершения запроса
+      }
+    };
+
+    fetchUserData();
+  }, [dispatch]);
 
   const isFormChanged =
     formValue.name !== user?.name ||
@@ -39,6 +57,9 @@ export const Profile: FC = () => {
         email: formValue.email,
         password: formValue.password
       });
+
+      console.log(formValue.password); //del
+
       dispatch(setUser(updatedUser.user));
       setFormValue((prevState) => ({
         ...prevState,
@@ -67,6 +88,10 @@ export const Profile: FC = () => {
       [e.target.name]: e.target.value
     }));
   };
+
+  if (loading) {
+    return <Preloader />;
+  }
 
   return (
     <ProfileUI

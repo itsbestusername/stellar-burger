@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { getCookie } from '../utils/cookie';
+import { getCookie, setCookie } from '../utils/cookie';
 
 interface AuthState {
   isLoggedIn: boolean;
@@ -18,6 +18,8 @@ const authSlice = createSlice({
     },
     logout: (state) => {
       state.isLoggedIn = false;
+      setCookie('accessToken', '', { expires: -1 });
+      localStorage.removeItem('refreshToken');
     }
   }
 });

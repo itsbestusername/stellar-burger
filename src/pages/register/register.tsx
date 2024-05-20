@@ -15,25 +15,6 @@ export const Register: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const handleSubmit = async (e: SyntheticEvent) => {
-  //   e.preventDefault();
-  //   setErrorText('');
-  //   try {
-  //     const response = await registerUserApi({
-  //       email,
-  //       password,
-  //       name: userName
-  //     });
-  //     setCookie('accessToken', response.accessToken);
-  //     localStorage.setItem('refreshToken', response.refreshToken);
-  //     dispatch(setUser(response.user)); // Устанавливаем пользователя
-  //     dispatch(login());
-  //     navigate('/');
-  //   } catch (error) {
-  //     setErrorText('Ошибка регистрации. Проверьте данные и попробуйте снова.');
-  //   }
-  // };
-
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
     setErrorText('');
@@ -43,7 +24,6 @@ export const Register: FC = () => {
         password,
         name: userName
       });
-      console.log('Ответ сервера при регистрации:', response); //del
       if (response.success) {
         setCookie('accessToken', response.accessToken);
         localStorage.setItem('refreshToken', response.refreshToken);
@@ -56,7 +36,6 @@ export const Register: FC = () => {
         );
       }
     } catch (error) {
-      console.error('Ошибка запроса при регистрации:', error); //del
       setErrorText('Ошибка регистрации. Проверьте данные и попробуйте снова.');
     }
   };

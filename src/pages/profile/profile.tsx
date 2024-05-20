@@ -58,8 +58,6 @@ export const Profile: FC = () => {
         password: formValue.password
       });
 
-      console.log(formValue.password); //del
-
       dispatch(setUser(updatedUser.user));
       setFormValue((prevState) => ({
         ...prevState,

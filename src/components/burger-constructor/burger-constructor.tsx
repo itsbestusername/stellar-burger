@@ -4,7 +4,7 @@ import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
 import { orderBurgerApi } from '@api';
 import { getCookie } from '../../utils/cookie';
-import { RootState, useSelector, useDispatch } from '../../services/store';
+import { useSelector, useDispatch } from '../../services/store';
 import {
   setOrderRequest,
   setOrderModalData,
@@ -17,20 +17,18 @@ export const BurgerConstructor: FC = () => {
 
   /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
   const constructorItems = useSelector(
-    (state: RootState) => state.burgerConstructor.constructorItems
+    (state) => state.burgerConstructor.constructorItems
   );
 
   const orderRequest = useSelector(
-    (state: RootState) => state.burgerConstructor.orderRequest
+    (state) => state.burgerConstructor.orderRequest
   );
 
   const orderModalData = useSelector(
-    (state: RootState) => state.burgerConstructor.orderModalData
+    (state) => state.burgerConstructor.orderModalData
   );
 
-  const isUserLoggedIn = useSelector(
-    (state: RootState) => state.auth.isLoggedIn
-  );
+  const isUserLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const onOrderClick = () => {
     if (!constructorItems.bun || orderRequest) return;

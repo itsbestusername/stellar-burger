@@ -1,9 +1,5 @@
-import { useSelector, useDispatch } from '../../services/store';
-import {
-  fetchIngredients,
-  selectIngredientsLoading
-} from '../../slices/ingredientsSlice';
-import { useEffect } from 'react';
+import { useSelector } from '../../services/store';
+import { selectIngredientsLoading } from '../../slices/ingredientsSlice';
 
 import styles from './constructor-page.module.css';
 
@@ -13,13 +9,7 @@ import { Preloader } from '../../components/ui';
 import { FC } from 'react';
 
 export const ConstructorPage: FC = () => {
-  const dispatch = useDispatch();
   const isIngredientsLoading = useSelector(selectIngredientsLoading);
-
-  // Вызываем загрузку ингредиентов при монтировании компонента
-  useEffect(() => {
-    dispatch(fetchIngredients());
-  }, [dispatch]);
 
   return (
     <>

@@ -4,7 +4,6 @@ import { TOrder } from '@utils-types';
 
 export const fetchOrders = createAsyncThunk('feed/fetchOrders', async () => {
   const response = await getFeedsApi();
-  console.log('Server response:', response.orders); // del
   return response.orders;
 });
 

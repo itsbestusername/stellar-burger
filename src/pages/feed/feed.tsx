@@ -1,21 +1,19 @@
 import { Preloader } from '@ui';
 import { FeedUI } from '@ui-pages';
 import { FC, useEffect } from 'react';
-import { useDispatch, useSelector, RootState } from '../../services/store';
+import { useDispatch, useSelector } from '../../services/store';
 import { fetchOrders } from '../../slices/feedSlice';
 
 export const Feed: FC = () => {
   /** TODO: взять переменную из стора */
   const dispatch = useDispatch();
-  const { orders, status, error } = useSelector(
-    (state: RootState) => state.feed
-  );
+  const { orders, status, error } = useSelector((state) => state.feed);
 
   useEffect(() => {
     if (status === 'idle') {
       dispatch(fetchOrders());
     }
-  }, [dispatch, status]);
+  }, [dispatch]);
 
   const handleGetFeeds = () => {
     dispatch(fetchOrders());

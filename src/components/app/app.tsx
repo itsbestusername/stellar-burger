@@ -1,8 +1,14 @@
 import '../../index.css';
 import styles from './app.module.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useDispatch, useSelector, RootState } from '../../services/store';
-import { setSelectedIngredient } from '../../slices/ingredientsSlice';
+import { useEffect } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from '../../services/store';
+import {
+  setSelectedIngredient,
+  fetchIngredients
+} from '../../slices/ingredientsSlice';
+import { clearSelectedOrder } from '../../slices/orderSlice';
+import { ProtectedRoute } from '../protectedRoute/protectedRoute';
 
 import { AppHeader } from '@components';
 import { ConstructorPage } from '../../pages/constructor-page';
@@ -20,55 +26,74 @@ import { NotFound404 } from '../../pages/not-fount-404';
 
 const App = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(fetchIngredients());
+  }, [dispatch]);
+
   const selectedIngredient = useSelector(
-    (state: RootState) => state.ingredients.selectedIngredient
+    (state) => state.ingredients.selectedIngredient
   );
 
+  const selectedOrder = useSelector((state) => state.order.selectedOrder);
+
   const handleModalClose = () => {
-    dispatch(setSelectedIngredient(null));
+    if (selectedIngredient) {
+      dispatch(setSelectedIngredient(null));
+    }
+
+    if (selectedOrder) {
+      dispatch(clearSelectedOrder());
+    }
+
+    navigate(-1);
   };
 
   return (
-    <BrowserRouter>
-      <div className={styles.app}>
-        <AppHeader />
-        <Routes>
-          <Route path='/' element={<ConstructorPage />} />
-          <Route path='/feed' element={<Feed />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/forgot-password' element={<ForgotPassword />} />
-          <Route path='/reset-password' element={<ResetPassword />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/profile/orders' element={<ProfileOrders />} />
-          <Route
-            path='/feed/:number'
-            element={
-              <Modal title='Order Info' onClose={handleModalClose}>
-                <OrderInfo />
-              </Modal>
-            }
-          />
-          <Route
-            path='/ingredients/:id'
-            element={
-              <Modal title='Ingredients Details' onClose={handleModalClose}>
-                <IngredientDetails />
-              </Modal>
-            }
-          />
-          <Route
-            path='/profile/orders/:number'
-            element={
-              <Modal title='Order Info' onClose={handleModalClose}>
-                <OrderInfo />
-              </Modal>
-            }
-          />
-          <Route path='*' element={<NotFound404 />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <div className={styles.app}>
+      <AppHeader />
+      <Routes>
+        <Route path='/' element={<ConstructorPage />} />
+        <Route path='/feed' element={<Feed />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
+        <Route path='/reset-password' element={<ResetPassword />} />
+        <Route path='/profile' element={<Profile />} />
+        <Route path='/profile/orders' element={<ProfileOrders />} />
+        <Route
+          path='/feed/:number'
+          element={
+            <Modal title='Order Info' onClose={handleModalClose}>
+              <OrderInfo />
+            </Modal>
+          }
+        />
+        <Route
+          path='/ingredients/:id'
+          element={
+            <Modal title='Ingredients Details' onClose={handleModalClose}>
+              <IngredientDetails />
+            </Modal>
+          }
+        />
+        <Route
+          path='/profile/orders/:number'
+          element={
+            <ProtectedRoute
+              path='/profile/orders/:number'
+              element={
+                <Modal title='Order Info' onClose={handleModalClose}>
+                  <OrderInfo />
+                </Modal>
+              }
+            />
+          }
+        />
+        <Route path='*' element={<NotFound404 />} />
+      </Routes>
+    </div>
   );
 };
 

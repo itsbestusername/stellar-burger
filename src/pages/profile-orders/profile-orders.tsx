@@ -1,22 +1,11 @@
 import { ProfileOrdersUI } from '@ui-pages';
-import { TOrder } from '@utils-types';
-import { FC, useEffect } from 'react';
-import { useDispatch, useSelector, RootState } from '../../services/store';
-import { fetchOrders } from '../../slices/feedSlice';
+import { FC } from 'react';
+import { useSelector } from '../../services/store';
 import { Preloader } from '@ui';
 
 export const ProfileOrders: FC = () => {
   /** TODO: взять переменную из стора */
-  const dispatch = useDispatch();
-  const { orders, status, error } = useSelector(
-    (state: RootState) => state.feed
-  );
-
-  useEffect(() => {
-    if (status === 'idle') {
-      dispatch(fetchOrders());
-    }
-  }, [dispatch, status]);
+  const { orders, status, error } = useSelector((state) => state.profileOrders);
 
   if (status === 'loading') {
     return <Preloader />;

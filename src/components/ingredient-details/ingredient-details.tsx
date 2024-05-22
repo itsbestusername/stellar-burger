@@ -16,8 +16,6 @@ export const IngredientDetails: FC = () => {
     (state) => state.ingredients.selectedIngredient
   );
 
-  console.log(ingredientData); //del
-
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch();
   const ingredients = useSelector(selectIngredients);

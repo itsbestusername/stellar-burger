@@ -5,6 +5,7 @@ import { authReducer } from '../slices/authSlice';
 import { userReducer } from '../slices/userSlice';
 import { feedReducer } from '../slices/feedSlice';
 import { orderReducer } from '../slices/orderSlice';
+import { profileOrdersReducer } from '../slices/profileOrderSlice';
 
 export const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
@@ -12,5 +13,6 @@ export const rootReducer = combineReducers({
   auth: authReducer,
   user: userReducer,
   feed: feedReducer,
-  order: orderReducer
+  order: orderReducer,
+  profileOrders: profileOrdersReducer
 });

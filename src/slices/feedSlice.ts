@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getFeedsApi } from '@api';
 import { TOrder } from '@utils-types';
+import { RootState } from '../services/store';
 
 export const fetchOrders = createAsyncThunk('feed/fetchOrders', async () => {
   const response = await getFeedsApi();
@@ -44,3 +45,5 @@ const feedSlice = createSlice({
 });
 
 export const feedReducer = feedSlice.reducer;
+export const selectOrders = (state: RootState): TOrder[] => state.feed.orders;
+export const selectFeedInfo = (state: RootState) => state.feed;

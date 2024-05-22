@@ -1,6 +1,6 @@
 // slices/orderSlice.ts
 
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
 import { getOrderByNumberApi } from '@api';
 
@@ -28,7 +28,7 @@ const orderSlice = createSlice({
   name: 'order',
   initialState,
   reducers: {
-    setOrderData: (state, action: PayloadAction<TOrder>) => {
+    setOrderData: (state, action) => {
       state.selectedOrder = action.payload;
     },
     clearSelectedOrder: (state) => {
@@ -41,13 +41,10 @@ const orderSlice = createSlice({
       .addCase(fetchOrderById.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(
-        fetchOrderById.fulfilled,
-        (state, action: PayloadAction<TOrder>) => {
-          state.status = 'succeeded';
-          state.selectedOrder = action.payload;
-        }
-      )
+      .addCase(fetchOrderById.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.selectedOrder = action.payload;
+      })
       .addCase(fetchOrderById.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message || null;

@@ -42,12 +42,15 @@ export const BurgerConstructor: FC = () => {
 
     orderBurgerApi([
       constructorItems.bun._id,
+      constructorItems.bun._id,
       ...constructorItems.ingredients.map((ingredient) => ingredient._id)
     ])
       .then((orderData) => {
         dispatch(setOrderRequest(false));
         dispatch(setOrderModalData(orderData.order));
         dispatch(clearConstructor());
+
+        console.log(orderData.order); //del
       })
       .catch(() => {
         dispatch(setOrderRequest(false));

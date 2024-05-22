@@ -10,9 +10,7 @@ export const Feed: FC = () => {
   const { orders, status, error } = useSelector((state) => state.feed);
 
   useEffect(() => {
-    if (status === 'idle') {
-      dispatch(fetchOrders());
-    }
+    dispatch(fetchOrders());
   }, [dispatch]);
 
   const handleGetFeeds = () => {

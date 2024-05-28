@@ -37,6 +37,7 @@ export const Register: FC = () => {
       }
     } catch (error) {
       setErrorText('Ошибка регистрации. Проверьте данные и попробуйте снова.');
+      console.log(error);
     }
   };
 

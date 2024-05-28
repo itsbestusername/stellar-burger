@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Route, Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from '../../services/store';
 import { RootState } from '../../services/store';
 
@@ -8,15 +8,13 @@ interface ProtectedRouteProps {
   path: string;
 }
 
-export const ProtectedRoute: FC<ProtectedRouteProps> = ({
-  element,
-  ...rest
-}) => {
+export const ProtectedRoute: FC<ProtectedRouteProps> = ({ element }) => {
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const location = useLocation();
 
   return isLoggedIn ? (
-    <Route {...rest} element={element} />
+    element
   ) : (
-    <Navigate to='/login' replace />
+    <Navigate to='/login' state={{ from: location }} replace />
   );
 };

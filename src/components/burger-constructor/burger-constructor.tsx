@@ -50,7 +50,7 @@ export const BurgerConstructor: FC = () => {
         dispatch(setOrderModalData(orderData.order));
         dispatch(clearConstructor());
 
-        console.log(orderData.order); //del
+        console.log(orderData.order);
       })
       .catch(() => {
         dispatch(setOrderRequest(false));

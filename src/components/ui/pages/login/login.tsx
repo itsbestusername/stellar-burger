@@ -23,12 +23,14 @@ export const LoginUI: FC<LoginUIProps> = ({
         className={`pb-15 ${styles.form}`}
         name='login'
         onSubmit={handleSubmit}
+        autoComplete='on'
       >
         <>
           <div className='pb-6'>
             <Input
               type='email'
               placeholder='E-mail'
+              autoComplete='email'
               onChange={(e) => setEmail(e.target.value)}
               value={email}
               name='email'
@@ -42,6 +44,7 @@ export const LoginUI: FC<LoginUIProps> = ({
               onChange={(e) => setPassword(e.target.value)}
               value={password}
               name='password'
+              autoComplete='current-password'
             />
           </div>
           <div className={`pb-6 ${styles.button}`}>

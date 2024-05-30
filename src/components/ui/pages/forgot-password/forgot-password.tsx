@@ -18,11 +18,13 @@ export const ForgotPasswordUI: FC<PageUIProps> = ({
         className={`pb-15 ${styles.form}`}
         name='login'
         onSubmit={handleSubmit}
+        autoComplete='on'
       >
         <div className='pb-6'>
           <Input
             type='email'
             placeholder='Укажите e-mail'
+            autoComplete='email'
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             name='email'

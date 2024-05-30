@@ -5,10 +5,7 @@ import { updateUserApi } from '@api';
 import { setUser } from '../../slices/userSlice';
 import { getUserApi } from '@api';
 import { Preloader } from '@ui';
-import {
-  profileOrdersStatus,
-  fetchProfileOrders
-} from '../../slices/profileOrderSlice';
+import { fetchProfileOrders } from '../../slices/profileOrderSlice';
 
 export const Profile: FC = () => {
   const dispatch = useDispatch();

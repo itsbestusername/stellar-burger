@@ -22,12 +22,14 @@ export const ProfileUI: FC<ProfileUIProps> = ({
     <form
       className={`mt-30 ${styles.form} ${commonStyles.form}`}
       onSubmit={handleSubmit}
+      autoComplete='on'
     >
       <>
         <div className='pb-6'>
           <Input
             type={'text'}
             placeholder={'Имя'}
+            autoComplete='name'
             onChange={handleInputChange}
             value={formValue.name}
             name={'name'}
@@ -41,6 +43,7 @@ export const ProfileUI: FC<ProfileUIProps> = ({
           <Input
             type={'email'}
             placeholder={'E-mail'}
+            autoComplete='email'
             onChange={handleInputChange}
             value={formValue.email}
             name={'email'}
@@ -54,6 +57,7 @@ export const ProfileUI: FC<ProfileUIProps> = ({
           <Input
             type={'password'}
             placeholder={'Пароль'}
+            autoComplete='current-password'
             onChange={handleInputChange}
             value={formValue.password}
             name={'password'}

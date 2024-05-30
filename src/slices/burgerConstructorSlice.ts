@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TConstructorIngredient } from '@utils-types';
 import { TIngredient, TOrder } from '@utils-types';
 
@@ -49,14 +49,24 @@ const burgerConstructorSlice = createSlice({
     setOrderModalData(state, action) {
       state.orderModalData = action.payload;
     },
-    addIngredient(state, action) {
-      // Если ингредиент не булка, добавляем его в список ингредиентов
-      if (action.payload.type !== 'bun') {
-        const newIngredient = {
-          ...action.payload,
-          id: uuidv4() // Используем uuid для генерации уникального id
-        };
-        state.constructorItems.ingredients.push(newIngredient);
+    addIngredient: {
+      reducer(state, action: PayloadAction<TConstructorIngredient>) {
+        state.constructorItems.ingredients.push(action.payload);
+      },
+      prepare(ingredient) {
+        // Проверяем, является ли ингредиент булкой
+        if (ingredient.type === 'bun') {
+          return {
+            payload: null // Возвращаем null, если это булка, чтобы не добавлять ее
+          };
+        } else {
+          return {
+            payload: {
+              ...ingredient,
+              id: uuidv4() // Генерация уникального id
+            }
+          };
+        }
       }
     },
     setBun(state, action) {

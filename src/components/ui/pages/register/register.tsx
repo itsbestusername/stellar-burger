@@ -25,12 +25,14 @@ export const RegisterUI: FC<RegisterUIProps> = ({
         className={`pb-15 ${styles.form}`}
         name='register'
         onSubmit={handleSubmit}
+        autoComplete='on'
       >
         <>
           <div className='pb-6'>
             <Input
               type='text'
               placeholder='Имя'
+              autoComplete='name'
               onChange={(e) => setUserName(e.target.value)}
               value={userName}
               name='name'
@@ -43,6 +45,7 @@ export const RegisterUI: FC<RegisterUIProps> = ({
             <Input
               type='email'
               placeholder='E-mail'
+              autoComplete='email'
               onChange={(e) => setEmail(e.target.value)}
               value={email}
               name={'email'}
@@ -56,6 +59,7 @@ export const RegisterUI: FC<RegisterUIProps> = ({
               onChange={(e) => setPassword(e.target.value)}
               value={password}
               name='password'
+              autoComplete='current-password'
             />
           </div>
           <div className={`pb-6 ${styles.button}`}>

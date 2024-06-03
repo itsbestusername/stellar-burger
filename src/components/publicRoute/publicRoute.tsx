@@ -15,6 +15,6 @@ export const PublicRoute: FC<PublicRouteProps> = ({ element }) => {
   return !isLoggedIn ? (
     element
   ) : (
-    <Navigate to='/' state={{ from: location }} replace />
+    <Navigate to='/stellar-burger' state={{ from: location }} replace />
   );
 };

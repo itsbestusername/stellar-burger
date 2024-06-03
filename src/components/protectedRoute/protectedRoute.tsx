@@ -15,6 +15,6 @@ export const ProtectedRoute: FC<ProtectedRouteProps> = ({ element }) => {
   return isLoggedIn ? (
     element
   ) : (
-    <Navigate to='/login' state={{ from: location }} replace />
+    <Navigate to='/stellar-burger/login' state={{ from: location }} replace />
   );
 };

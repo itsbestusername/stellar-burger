@@ -95,8 +95,7 @@
     "lint:fix": "npm run lint -- --fix",
     "format": "prettier ./src --write",
     "build": "webpack --mode=production --node-env=production",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d public"
+    "deploy": "gh-pages -d dist"
   },
   "eslintConfig": {
     "extends": [

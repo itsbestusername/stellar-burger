@@ -14,7 +14,7 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
     <nav className={`${styles.menu} p-4`}>
       <div className={styles.menu_part_left}>
         <NavLink
-          to='/stellar-burger'
+          to='/'
           className={({ isActive }) =>
             `${styles.link} ${isActive ? styles.link_active : ''}`
           }
@@ -23,7 +23,7 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
           <p className='text text_type_main-default ml-2 mr-10'>Конструктор</p>
         </NavLink>
         <NavLink
-          to='/stellar-burger/feed'
+          to='/feed'
           className={({ isActive }) =>
             `${styles.link} ${isActive ? styles.link_active : ''}`
           }
@@ -37,7 +37,7 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
       </div>
       <div className={styles.link_position_last}>
         <NavLink
-          to='/stellar-burger/profile'
+          to='/profile'
           className={({ isActive }) =>
             `${styles.link} ${isActive ? styles.link_active : ''}`
           }

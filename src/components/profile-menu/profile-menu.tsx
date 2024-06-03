@@ -17,7 +17,7 @@ export const ProfileMenu: FC = () => {
       await logoutApi();
       dispatch(logout());
       dispatch(clearUser());
-      navigate('/stellar-burger/login');
+      navigate('/login');
     } catch (error) {
       console.error('Ошибка выхода:', error);
     }

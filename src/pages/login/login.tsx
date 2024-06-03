@@ -24,7 +24,7 @@ export const Login: FC = () => {
         localStorage.setItem('refreshToken', response.refreshToken);
         dispatch(setUser(response.user));
         dispatch(login());
-        navigate('/stellar-burger');
+        navigate('/');
       } else {
         setErrorText(
           'Неверный email или пароль. Проверьте данные и попробуйте снова.'

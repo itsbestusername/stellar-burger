@@ -29,7 +29,7 @@ export const Register: FC = () => {
         localStorage.setItem('refreshToken', response.refreshToken);
         dispatch(setUser(response.user));
         dispatch(login());
-        navigate('/stellar-burger');
+        navigate('/');
       } else {
         setErrorText(
           'Ошибка регистрации. Проверьте данные и попробуйте снова.'

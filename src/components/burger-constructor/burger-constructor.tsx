@@ -34,7 +34,7 @@ export const BurgerConstructor: FC = () => {
     if (!constructorItems.bun || orderRequest) return;
 
     if (!isUserLoggedIn) {
-      navigate('/stellar-burger/login');
+      navigate('/login');
       return;
     }
 

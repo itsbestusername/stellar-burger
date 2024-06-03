@@ -16,14 +16,14 @@ export const ResetPassword: FC = () => {
     resetPasswordApi({ password, token })
       .then(() => {
         localStorage.removeItem('resetPassword');
-        navigate('/stellar-burger/login');
+        navigate('/login');
       })
       .catch((err) => setError(err));
   };
 
   useEffect(() => {
     if (!localStorage.getItem('resetPassword')) {
-      navigate('/stellar-burger/forgot-password', { replace: true });
+      navigate('/forgot-password', { replace: true });
     }
   }, [navigate]);
 

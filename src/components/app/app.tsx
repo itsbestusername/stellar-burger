@@ -74,56 +74,35 @@ const App = () => {
     <div className={styles.app}>
       <AppHeader />
       <Routes>
-        <Route path='/stellar-burger' element={<ConstructorPage />} />
-        <Route path='/stellar-burger/feed' element={<Feed />} />
+        <Route path='/' element={<ConstructorPage />} />
+        <Route path='/feed' element={<Feed />} />
         <Route
-          path='/stellar-burger/login'
+          path='/login'
+          element={<PublicRoute path='/login' element={<Login />} />}
+        />
+        <Route
+          path='/register'
+          element={<PublicRoute path='/register' element={<Register />} />}
+        />
+        <Route
+          path='/forgot-password'
           element={
-            <PublicRoute path='/stellar-burger/login' element={<Login />} />
+            <PublicRoute path='/forgot-password' element={<ForgotPassword />} />
           }
         />
         <Route
-          path='/stellar-burger/register'
+          path='/reset-password'
           element={
-            <PublicRoute
-              path='/stellar-burger/register'
-              element={<Register />}
-            />
+            <PublicRoute path='/reset-password' element={<ResetPassword />} />
           }
         />
         <Route
-          path='/stellar-burger/forgot-password'
-          element={
-            <PublicRoute
-              path='/stellar-burger/forgot-password'
-              element={<ForgotPassword />}
-            />
-          }
+          path='/profile'
+          element={<ProtectedRoute path='/profile' element={<Profile />} />}
         />
+        <Route path='/profile/orders' element={<ProfileOrders />} />
         <Route
-          path='/stellar-burger/reset-password'
-          element={
-            <PublicRoute
-              path='/stellar-burger/reset-password'
-              element={<ResetPassword />}
-            />
-          }
-        />
-        <Route
-          path='/stellar-burger/profile'
-          element={
-            <ProtectedRoute
-              path='/stellar-burger/profile'
-              element={<Profile />}
-            />
-          }
-        />
-        <Route
-          path='/stellar-burger/profile/orders'
-          element={<ProfileOrders />}
-        />
-        <Route
-          path='/stellar-burger/feed/:number'
+          path='/feed/:number'
           element={
             <Modal title='Order Info' onClose={handleModalClose}>
               <OrderInfo />
@@ -131,7 +110,7 @@ const App = () => {
           }
         />
         <Route
-          path='/stellar-burger/ingredients/:id'
+          path='/ingredients/:id'
           element={
             <Modal title='Ingredients Details' onClose={handleModalClose}>
               <IngredientDetails />
@@ -139,10 +118,10 @@ const App = () => {
           }
         />
         <Route
-          path='/stellar-burger/profile/orders/:number'
+          path='/profile/orders/:number'
           element={
             <ProtectedRoute
-              path='/stellar-burger/profile/orders/:number'
+              path='/profile/orders/:number'
               element={
                 <Modal title='Order Info' onClose={handleModalClose}>
                   <OrderInfo />

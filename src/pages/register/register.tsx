@@ -3,7 +3,7 @@ import { RegisterUI } from '@ui-pages';
 import { useDispatch } from '../../services/store';
 import { useNavigate } from 'react-router-dom';
 import { registerUserApi } from '@api';
-import { login } from '../../slices/authSlice';
+import { login } from '../../slices/authSlice/authSlice';
 import { setUser } from '../../slices/userSlice';
 import { setCookie } from '../../utils/cookie';
 

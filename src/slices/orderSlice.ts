@@ -10,7 +10,7 @@ interface OrderState {
   error: string | null;
 }
 
-const initialState: OrderState = {
+export const initialState: OrderState = {
   selectedOrder: null,
   status: 'idle',
   error: null

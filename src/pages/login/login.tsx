@@ -3,7 +3,7 @@ import { LoginUI } from '@ui-pages';
 import { useDispatch } from '../../services/store';
 import { useNavigate } from 'react-router-dom';
 import { loginUserApi } from '@api'; // Импортируем функцию для авторизации
-import { login } from '../../slices/authSlice'; // Импортируем действие для изменения состояния аутентификации
+import { login } from '../../slices/authSlice/authSlice'; // Импортируем действие для изменения состояния аутентификации
 import { setCookie } from '../../utils/cookie';
 import { setUser } from '../../slices/userSlice';
 

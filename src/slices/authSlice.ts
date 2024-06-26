@@ -1,11 +1,11 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { getCookie, setCookie } from '../utils/cookie';
 
 interface AuthState {
   isLoggedIn: boolean;
 }
 
-const initialState: AuthState = {
+export const initialState: AuthState = {
   isLoggedIn: !!getCookie('accessToken') // Проверяем наличие токена при инициализации
 };
 

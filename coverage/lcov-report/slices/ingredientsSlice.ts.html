@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">74.32% </span>
+                <span class="strong">86.48% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>55/74</span>
+                <span class='fraction'>64/74</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>5/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20% </span>
+                <span class="strong">40% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/5</span>
+                <span class='fraction'>2/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">74.32% </span>
+                <span class="strong">86.48% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>55/74</span>
+                <span class='fraction'>64/74</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -174,26 +174,26 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -247,27 +247,27 @@ const ingredientsSlice = createSlice({
   name: 'ingredients',
   initialState,
   reducers: {
-    setSelectedIngredient<span class="fstat-no" title="function not covered" >(state, action) {</span>
-<span class="cstat-no" title="statement not covered" >      state.selectedIngredient = action.payload;</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+    setSelectedIngredient(state, action) {
+      state.selectedIngredient = action.payload;
+    }
   },
   extraReducers: (builder) =&gt; {
     builder
       // Обработка начала запроса
       .addCase(fetchIngredients.pending, (state) =&gt; {
-<span class="cstat-no" title="statement not covered" >        state.isLoading = true;</span>
-<span class="cstat-no" title="statement not covered" >        state.error = null; // Сброс ошибки при начале загрузки</span>
+        state.isLoading = true;
+        state.error = null; // Сброс ошибки при начале загрузки
       })
       // Обработка успешного получения данных
       .addCase(fetchIngredients.fulfilled, (state, action) =&gt; {
-<span class="cstat-no" title="statement not covered" >        state.isLoading = false;</span>
-<span class="cstat-no" title="statement not covered" >        state.ingredients = action.payload; // Сохраняем полученные данные об ингредиентах</span>
-<span class="cstat-no" title="statement not covered" >        state.error = null; // Сброс ошибки при успешной загрузке</span>
+        state.isLoading = false;
+        state.ingredients = action.payload; // Сохраняем полученные данные об ингредиентах
+        state.error = null; // Сброс ошибки при успешной загрузке
       })
       // Обработка ошибки при получении данных
       .addCase(fetchIngredients.rejected, (state, action) =&gt; {
-<span class="cstat-no" title="statement not covered" >        state.isLoading = false;</span>
-<span class="cstat-no" title="statement not covered" >        state.error = action.error.message ?? 'Unknown error'; // Сохраняем сообщение об ошибке</span>
+        state.isLoading = false;
+        state.error = action.error.message<span class="branch-0 cbranch-no" title="branch not covered" > ?? 'Unknown error';</span> // Сохраняем сообщение об ошибке
       });
   }
 });
@@ -292,7 +292,7 @@ export const selectIngredientsError = <span class="fstat-no" title="function not
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-06-26T14:40:24.356Z
+                at 2024-06-28T13:08:06.973Z
             </div>
         <script src="../prettify.js"></script>
         <script>

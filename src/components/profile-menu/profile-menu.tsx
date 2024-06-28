@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { ProfileMenuUI } from '@ui';
 import { logoutApi } from '@api';
 import { useDispatch } from '../../services/store';
-import { logout } from '../../slices/authSlice/authSlice';
+import { logout } from '../../slices/authSlice';
 import { clearUser } from '../../slices/userSlice';
 
 export const ProfileMenu: FC = () => {

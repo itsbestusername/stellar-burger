@@ -9,14 +9,14 @@ import { initialState as profileOrdersInitialState } from '../slices/profileOrde
 
 describe('rootReducer', () => {
     it('should return the initial state when state is undefined and action is unknown', () => {
-      const state = rootReducer(undefined, { type: 'UNKNOWN_ACTION' });
-  
-      expect(state.ingredients).toEqual(ingredientsInitialState);
-      expect(state.burgerConstructor).toEqual(burgerConstructorInitialState);
-      expect(state.auth).toEqual(authInitialState);
-      expect(state.user).toEqual(userInitialState);
-      expect(state.feed).toEqual(feedInitialState);
-      expect(state.order).toEqual(orderInitialState);
-      expect(state.profileOrders).toEqual(profileOrdersInitialState);
+        const state = rootReducer(undefined, { type: 'UNKNOWN_ACTION' });
+
+        expect(state.ingredients).toEqual(ingredientsInitialState);
+        expect(state.burgerConstructor).toEqual(burgerConstructorInitialState);
+        expect(state.auth).toEqual(authInitialState);
+        expect(state.user).toEqual(userInitialState);
+        expect(state.feed).toEqual(feedInitialState);
+        expect(state.order).toEqual(orderInitialState);
+        expect(state.profileOrders).toEqual(profileOrdersInitialState);
     });
-  });
+});

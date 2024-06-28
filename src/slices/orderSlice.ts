@@ -4,7 +4,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
 import { getOrderByNumberApi } from '@api';
 
-interface OrderState {
+export interface OrderState {
   selectedOrder: TOrder | null;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
